@@ -1,25 +1,40 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.*;
+
+@Entity
 public class Customer {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id; //generato dal sistema
 	
+	@Column (nullable = false)
 	private String firstName;
-	private String lastName;	
+	@Column (nullable = false)
+	private String lastName;
+	
+	@Temporal (TemporalType.DATE)
 	private Date dateOfBirth;
 	
+	@Temporal (TemporalType.TIMESTAMP)
 	private Date registrationDate;
+	
+	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
 	private Address address;
 	
+	@Column (nullable = false, unique = true)
 	private String email;
+	@Column (nullable = false)
 	private String password;
 	
 	private boolean administrator;
 	
-	
+	@OneToMany(mappedBy="customer", fetch = FetchType.EAGER)  //EAGER: scelta da discutere
 	private List<Order> orders;
 	
 	
@@ -31,6 +46,8 @@ public class Customer {
 		this.registrationDate = registrationDate;
 		this.address = address;
 		this.email = email;
+		
+		this.orders = new ArrayList<Order>();
 		
 	}
 
@@ -99,6 +116,15 @@ public class Customer {
 		this.administrator = administrator;
 	}
 
+	@Override
+	public String toString() {
+		return "Customer [firstName=" + firstName + ", lastName=" + lastName
+				+ ", dateOfBirth=" + dateOfBirth + ", registrationDate="
+				+ registrationDate + ", address=" + address + ", email="
+				+ email + "]";
+	}
+
 	
+
 	
 }

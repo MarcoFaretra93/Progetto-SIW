@@ -1,16 +1,26 @@
 package model;
 
 import java.util.List;
+import javax.persistence.*;
 
+@Entity
 public class Product {
 
-//	private long id;  generato dal sistema?
+//	private long id;  generato dal sistema? O basta il codice? Vedere in seguito
+	
+	@Column(nullable = false, unique = true)
 	private String code;
+	@Column(nullable = false, unique = true)
 	private String name;
-	private String description;
+
+	private String description; 
+	
+	@Column(nullable = true)
 	private float price;
+	@Column(nullable = true)
 	private int quantity;
 	
+	@ManyToMany(mappedBy= "products")
 	private List<Provider> providers;
 	
 	

@@ -1,14 +1,31 @@
 package model;
 
+import java.util.List;
+import javax.persistence.*;
+
+@Entity
 public class Provider {
 	
-	private long id; //generato dal sistema
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private long id; 
+	
+	@Column(nullable = false)
 	private String name;
 	
+	@Column(nullable = false)
 	private long vatEntry; //partita IVA
+	
+	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
 	private Address address;
+	@Column(nullable = true)
 	private float phoneNumber;
+	@Column(nullable = true)
 	private String email;
+	
+	@ManyToMany
+	private List<Product> products;
+	
 	
 	public Provider (long id, String name, long vatEntry, Address address, float phoneNumber, String email) {
 		

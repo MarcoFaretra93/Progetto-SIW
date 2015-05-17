@@ -2,23 +2,37 @@ package model;
 
 import java.util.Date;
 import java.util.List;
+import javax.persistence.*;
 
+@Entity
+@Table(name="orders")
 public class Order {
 	
+	@Id
+	@GeneratedValue (strategy = GenerationType.AUTO)
 	private long id;
 	
-	private Date creationTime;
-	private Date completionTime;
-	private Date evasionTime;
+	@Temporal (TemporalType.TIMESTAMP) //restituisce sia la data che l'orario
+	private Date creationDate;
+	@Temporal (TemporalType.TIMESTAMP)	
+	private Date completionDate;
+	@Temporal (TemporalType.TIMESTAMP)
+	private Date evasionDate;
 		
+	@OneToMany(fetch = FetchType.EAGER) //EAGER: scelta da discutere
 	private List<OrderLine> orderLines;
 	
+	@ManyToOne
+	@JoinColumn(name="customer_id") 
 	private Customer customer;
 	
-	public Order (Customer customer, Date creationTime) {
+	private boolean completed;
+	private boolean evaded;
+	
+	public Order (Customer customer, Date creationDate) {
 		
 		this.customer = customer;
-		this.creationTime = creationTime;
+		this.creationDate = creationDate;
 		
 	}
 
@@ -30,28 +44,28 @@ public class Order {
 		this.id = id;
 	}
 
-	public Date getCreationTime() {
-		return creationTime;
+	public Date getCreationDate() {
+		return creationDate;
 	}
 
-	public void setCreationTime(Date creationTime) {
-		this.creationTime = creationTime;
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
 	}
 
-	public Date getCompletionTime() {
-		return completionTime;
+	public Date getCompletionDate() {
+		return completionDate;
 	}
 
-	public void setCompletionTime(Date completionTime) {
-		this.completionTime = completionTime;
+	public void setCompletionDate(Date completionDate) {
+		this.completionDate = completionDate;
 	}
 
-	public Date getEvasionTime() {
-		return evasionTime;
+	public Date getEvasionDate() {
+		return evasionDate;
 	}
 
-	public void setEvasionTime(Date evasionTime) {
-		this.evasionTime = evasionTime;
+	public void setEvasionDate(Date evasionDate) {
+		this.evasionDate = evasionDate;
 	}
 
 	public List<OrderLine> getOrderLines() {
@@ -69,7 +83,30 @@ public class Order {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-	
+
+	public boolean isCompleted() {
+		return completed;
+	}
+
+	public void setCompleted(boolean completed) {
+		this.completed = completed;
+	}
+
+	public boolean isEvaded() {
+		return evaded;
+	}
+
+	public void setEvaded(boolean evaded) {
+		this.evaded = evaded;
+	}
+
+	@Override
+	public String toString() {
+		return "Order [creationDate=" + creationDate + ", completionDate="
+				+ completionDate + ", evasionDate=" + evasionDate
+				+ ", completed=" + completed + ", evaded=" + evaded + "]";
+	}
+
 	
 	
 	
