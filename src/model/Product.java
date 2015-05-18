@@ -12,7 +12,7 @@ public class Product {
 	private String code;
 	@Column(nullable = false, unique = true)
 	private String name;
-
+	
 	private String description; 
 	
 	@Column(nullable = true)
