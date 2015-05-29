@@ -29,8 +29,4 @@ public class ProductFacade {
 		List<Product> products = query.getResultList();
 		return products;
 	}
-	
-	
-	
-
 }
