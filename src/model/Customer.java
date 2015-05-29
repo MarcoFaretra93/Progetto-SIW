@@ -8,47 +8,50 @@ import javax.persistence.*;
 
 @Entity
 public class Customer {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id; //generato dal sistema
+	private long id; 
 	
 	@Column (nullable = false)
 	private String firstName;
+
 	@Column (nullable = false)
 	private String lastName;
-	
+
 	@Temporal (TemporalType.DATE)
 	private Date dateOfBirth;
-	
+
 	@Temporal (TemporalType.TIMESTAMP)
 	private Date registrationDate;
-	
+
 	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
 	private Address address;
-	
+
 	@Column (nullable = false, unique = true)
 	private String email;
+
 	@Column (nullable = false)
 	private String password;
-	
-	private boolean administrator;
-	
-	@OneToMany(mappedBy="customer", fetch = FetchType.EAGER)  //EAGER: scelta da discutere
+
+	@OneToMany(mappedBy="customer", fetch = FetchType.EAGER)  
 	private List<Order> orders;
-	
-	
-	public Customer (String firstName, String lastName, Date dateOfBirth, Date registrationDate, Address address, String email) {
-		
+
+	@Column(nullable=false)
+	private String role;
+
+	public Customer (String firstName, String lastName, Date dateOfBirth, Date registrationDate, Address address, 
+			String email, String role) {
+
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.dateOfBirth = dateOfBirth;
 		this.registrationDate = registrationDate;
 		this.address = address;
 		this.email = email;
-		
 		this.orders = new ArrayList<Order>();
-		
+		this.role = role;
+
 	}
 
 	public long getId() {
@@ -106,25 +109,41 @@ public class Customer {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
-	public boolean isAdministrator () {
-		return administrator;
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 	
-	public void setAdministrator (boolean administrator) {
-		this.administrator = administrator;
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	@Override
 	public String toString() {
-		return "Customer [firstName=" + firstName + ", lastName=" + lastName
-				+ ", dateOfBirth=" + dateOfBirth + ", registrationDate="
-				+ registrationDate + ", address=" + address + ", email="
-				+ email + "]";
+		return "Customer [id=" + id + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", dateOfBirth=" + dateOfBirth
+				+ ", registrationDate=" + registrationDate + ", address="
+				+ address + ", email=" + email + ", orders=" + orders
+				+ ", role=" + role + "]";
 	}
 
+	public boolean checkPassword(String password) {
+		if(password.equals(this.password))
+			return true;
+		return false;
+	}
 	
-
+	public void addOrder(Order order){
+		this.orders.add(order);
+	}
 	
 }

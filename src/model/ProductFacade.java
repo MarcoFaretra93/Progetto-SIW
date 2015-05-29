@@ -13,12 +13,8 @@ public class ProductFacade {
     private EntityManager em;
     
     
-    public Product createProduct(String code, String name, String description, float price
-    		//int quantity ---> vedi Product.java
-    		) {
-		Product product = new Product(code, name, description, price
-				//,quantity
-				);
+    public Product createProduct(String code, String name, String description, float price) {
+		Product product = new Product(code, name, description, price);
 		em.persist(product);
 		return product;
 	}

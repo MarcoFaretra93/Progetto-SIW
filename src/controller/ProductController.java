@@ -8,8 +8,10 @@ import model.ProductFacade;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 
 @ManagedBean(name="productController")
+@SessionScoped
 public class ProductController {
 
 	@ManagedProperty(value="#{param.id}")
@@ -24,14 +26,15 @@ public class ProductController {
 	@EJB
 	private ProductFacade productFacade;
 	
+		
 	public String createProduct(){
-		this.product=productFacade.createProduct(name, code, description, price);
+		this.product = productFacade.createProduct(name, code, description, price);
 		return "product";
 	}
 	
 	public String listProducts(){
 		this.products = productFacade.getAllProducts();
-		return "products";
+		return "productCatalog";
 	}
 
 	public String findProduct() {
@@ -43,7 +46,7 @@ public class ProductController {
 		this.product = productFacade.getProduct(id);
 		return "product";
 	}
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -99,6 +102,8 @@ public class ProductController {
 	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
+
+	
 }
 
 

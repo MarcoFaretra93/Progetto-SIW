@@ -19,22 +19,16 @@ public class Product {
 	@Column(nullable = true)
 	private float price;
 
-//	@Column(nullable = true)    ---> Non ce lo metterei perch quantitˆ  pi appropriato come attributo
-//	private int quantity;		---> di una classe ProductDescription, secondo me. CR
-	
 	@ManyToMany(mappedBy= "products")
 	private List<Provider> providers;
 	
 	
-	public Product (String code, String name, String description, float price
-			//, int quantity
-			) {
+	public Product (String code, String name, String description, float price) {
 		
 		this.code = code;
 		this.name = name;
 		this.description = description;
 		this.price = price;
-		//this.quantity = quantity;		
 		
 	}
 
@@ -77,16 +71,6 @@ public class Product {
 	public void setPrice(float price) {
 		this.price = price;
 	}
-
-
-//	public int getQuantity() {
-//		return quantity;
-//	}
-//
-//
-//	public void setQuantity(int quantity) {
-//		this.quantity = quantity;
-//	}
 
 
 	public List<Provider> getProviders() {
