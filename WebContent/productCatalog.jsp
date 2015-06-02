@@ -22,8 +22,40 @@
 <title>Catalogo Prodotti</title>
 </head>
 <body>
-	<h1>Catalogo prodotti:</h1>
-	<f:view>
+
+<nav class="navbar navbar-inverse">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="sr-only"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand">bazarOne</a>
+		</div>
+		<div class="navbar-collapse collapse" aria-expanded="false"
+			style="height: 1px;">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="faces/index.jsp">Home</a></li>
+
+			</ul>
+			<div class="navbar-right">
+				<a href="login.jsp">
+					<button type="submit" class="btn btn-success">Login</button>
+				</a>
+			</div>
+		</div>
+		<!--/.nav-collapse -->
+	</div>
+	</nav>
+
+
+<div class="container">
+	<div class="starter-template">
+	<h1>Catalogo prodotti</h1>
+	<p class="lead">
+	Here there are products. Enjoy with them!
+	</p>
 
 		<c:forEach var="product" items="${productController.products}">
 			<tr>
@@ -34,7 +66,8 @@
 				<td>${product.price}</td>
 			</tr>
 		</c:forEach>
-		<a href="<c:url value="/faces/index.jsp" />">Home</a>
-	</f:view>
+		
+	</div>
+	</div>
 </body>
 </html>

@@ -29,6 +29,8 @@ public class Order {
 	private boolean completed;
 	private boolean evaded;
 	
+	public Order(){}
+	
 	public Order (Customer customer, Date creationDate) {
 		
 		this.customer = customer;

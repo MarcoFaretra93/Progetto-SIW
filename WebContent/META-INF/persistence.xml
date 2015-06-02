@@ -15,10 +15,10 @@
 		<class>model.OrderLine</class>
 		<properties>
 			<property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)" />
-			<property name="openjpa.ConnectionDriverName" value="org.postgresql.Driver" />
+			<!--<property name="openjpa.ConnectionDriverName" value="org.postgresql.Driver" />
 			<property name="openjpa.ConnectionUserName" value="postgres" />
 			<property name="openjpa.ConnectionPassword" value="clacla" />
-			<property name="openjpa.ConnectionURL" value="jdbc:postgresql://localhost/model" />
+			<property name="openjpa.ConnectionURL" value="jdbc:postgresql://localhost/model" />-->
 			<property name="openjpa.jdbc.DBDictionary" value="postgres" />
 			<property name="openjpa.jdbc.SynchronizeMappings"
 				value="buildSchema(SchemaAction=add,ForeignKeys=true)" />

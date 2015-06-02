@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.ArrayList;
 
 import javax.ejb.EJB;
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 
@@ -13,7 +12,6 @@ import model.Customer;
 import model.CustomerFacade;
 import model.Order;
 
-@ApplicationScoped
 @ManagedBean(name="customerController")
 public class CustomerController {
 	

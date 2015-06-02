@@ -9,7 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 @Stateless(name = "customerFacade")
-@NamedQuery(name = "loginCustomer", query = "SELECT c FROM Customer WHERE fistname=firstName AND lastName=lastName")
+@NamedQuery(name = "loginCustomer", query = "SELECT c FROM Customer WHERE fistname='firstName' AND lastName='lastName'")
 public class CustomerFacade {
 	
 	@PersistenceContext(unitName = "unit-progettoSiw")

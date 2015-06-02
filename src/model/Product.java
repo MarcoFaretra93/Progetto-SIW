@@ -1,7 +1,13 @@
 package model;
 
 import java.util.List;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Product {
@@ -21,7 +27,6 @@ public class Product {
 
 	@ManyToMany(mappedBy= "products")
 	private List<Provider> providers;
-	
 	
 	public Product (String code, String name, String description, float price) {
 		
@@ -81,7 +86,6 @@ public class Product {
 	public void setProviders(List<Provider> providers) {
 		this.providers = providers;
 	}
-	
 	
 }
 

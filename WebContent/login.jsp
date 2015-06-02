@@ -23,29 +23,66 @@
 <title>Login</title>
 </head>
 <body>
-	<f:view>
 
+
+	<nav class="navbar navbar-inverse">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="sr-only"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand">bazarOne</a>
+		</div>
+		<div class="navbar-collapse collapse" aria-expanded="false"
+			style="height: 1px;">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="faces/index.jsp">Home</a></li>
+
+			</ul>
+			<div class="navbar-right">
+				<a href="login.jsp">
+					<button type="submit" class="btn btn-success">Login</button>
+				</a>
+			</div>
+		</div>
+		<!--/.nav-collapse -->
+	</div>
+	</nav>
+
+	<div class="container">
 		<h1>Login</h1>
-		<h:outputText value="Inserisci il tuo nome e il cognome per accedere" />
-		<div>
-			Nome:
-			<h:inputText value="#{customerController.firstName}" required="true"
-				requiredMessage="obbligatorio!" />
-		</div>
-		<div>
-			Cognome:
-			<h:inputText value="#{customerController.lastName}" required="true"
-				requiredMessage="obbligatorio!" />
-		</div>
-		<div>
-			Password:
-			<h:inputSecret value="#{customerController.password}" required="true"
-				requiredMessage="obbligatorio!" />
-		</div>
-		<div>
-			<h:commandButton value="Accedi" action=" " />
-			<h:outputLink value="faces/index.jsp"> Esci </h:outputLink>
-		</div>
-	</f:view>
+
+
+
+		<f:view>
+			<form class="form-signin">
+				<h:form>
+
+					<h5 class="form-signin-heading">Please sign in</h5>
+					<div>
+						Nome:
+						<h:inputText value="#{customerController.firstName}"
+							required="true" requiredMessage="obbligatorio!" />
+					</div>
+					<div>
+						Cognome:
+						<h:inputText value="#{customerController.lastName}"
+							required="true" requiredMessage="obbligatorio!" />
+					</div>
+					<div>
+						Password:
+						<h:inputSecret value="#{customerController.password}"
+							required="true" requiredMessage="obbligatorio!" />
+					</div>
+					<div>
+						<h:commandButton value="Accedi" action=" " />
+						<h:outputLink value="faces/index.jsp"> Esci </h:outputLink>
+					</div>
+				</h:form>
+			</form>
+		</f:view>
+	</div>
 </body>
 </html>

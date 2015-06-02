@@ -1,15 +1,26 @@
 package model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity(name = "orderlines")
 public class OrderLine {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
+	@ManyToOne
 	private Product product;
 	private float unitPrice;
 	private int quantity;	
 	
+	public OrderLine(){}
 	
-	public OrderLine (Product prodict, float unitPrice, int quantity) {
+	public OrderLine (Product prodict, float unitPrice, int quantity, Product product) {
 		
 		this.product = product;
 		this.unitPrice = unitPrice;

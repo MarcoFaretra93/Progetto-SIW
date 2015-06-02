@@ -24,41 +24,62 @@
 </head>
 <body>
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-        </div>
-      </div>
-    </nav>
-    <div><h1> </h1></div>
-    
-  <div class="container theme-showcase" role="main">
-	<f:view>
-	<div class="bs-docs-header" id="content" tabindex="-1">
-      <div class="container">
-        <h1>Welcome to bazarOne</h1>
-        <p>A complete wonderful world where anybody can lose his mind. You could find strange creature and exciting products.</p>
-        <div id="carbonads-container"><div class="carbonad"><div id="azcarbon"></div><script>var z = document.createElement("script"); z.async = true; z.src = "http://engine.carbonads.com/z/32341/azcarbon_2_1_0_HORIZ"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);</script></div></div>
-
-      </div>
-		
-		<div>
-
-			<h:form>
-			<button type="button" class="btn btn-lg btn-default">
-				<h:commandLink action="/productCatalog.jsp"
-					value="Consulta catalogo prodotti" />
-					</button>
-				<div>
-				<button type="button" class="btn btn-default">
-					<h:commandLink action="/login.jsp" value="Login" />
-					</button>
-				</div>
-			</h:form>
-
+	<nav class="navbar navbar-inverse">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="sr-only"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand">bazarOne</a>
 		</div>
+		<div class="navbar-collapse collapse" aria-expanded="false"
+			style="height: 1px;">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="faces/index.jsp">Home</a></li>
+
+			</ul>
+			<div class="navbar-right">
+				<a href="login.jsp">
+					<button type="submit" class="btn btn-success">Login</button>
+				</a>
+			</div>
 		</div>
-	</f:view>
+		<!--/.nav-collapse -->
 	</div>
+	</nav>
+
+	<div class="container theme-showcase">
+		<div class="jumbotron">
+			<div class="container">
+				<h1>Welcome to bazarOne</h1>
+				<p>A complete wonderful world where anybody can loose his mind.
+					You could find strange creature and exciting products.</p>
+				<div id="carbonads-container">
+					<div class="carbonad">
+				</div>
+
+			</div>
+		</div>
+</div>
+
+
+		<div class="row">
+			<div class="col-md-4">
+				<h2>Product Catalog</h2>
+				<p>Everything you want, you find here. Don't you know what you want?
+				With clicking on the button below, you'll know what you want and what you need.
+				Quick click !</p>
+				<p>
+					<a href="productCatalog.jsp">
+						<button type="button" class="btn btn-lg btn-success">
+							View more >></button>
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+
 </body>
 </html>
