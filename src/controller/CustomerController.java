@@ -32,6 +32,12 @@ public class CustomerController {
 	@EJB
 	private CustomerFacade customerFacade;
 	
+	public String loginCustomer(){
+		this.customer = customerFacade.login(firstName, lastName, password);
+		if(customer==null) return "invalid";
+		return "newProduct";
+	}
+	
 	public Long getId() {
 		return id;
 	}

@@ -77,7 +77,7 @@
 							required="true" requiredMessage="obbligatorio!" />
 					</div>
 					<div>
-						<h:commandButton value="Accedi" action=" " />
+						<h:commandButton value="Accedi" action="#{customerController.loginCustomer}" />
 						<h:outputLink value="index.jsp"> Esci </h:outputLink>
 					</div>
 				</h:form>
