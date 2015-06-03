@@ -10,7 +10,7 @@ public class Order {
 	
 	@Id
 	@GeneratedValue (strategy = GenerationType.AUTO)
-	private long id;
+	private Long id;
 	
 	@Temporal (TemporalType.TIMESTAMP) //restituisce sia la data che l'orario
 	private Date creationDate;
@@ -38,11 +38,11 @@ public class Order {
 		
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
