@@ -78,7 +78,7 @@
 					</div>
 					<div>
 						<h:commandButton value="Accedi" action=" " />
-						<h:outputLink value="faces/index.jsp"> Esci </h:outputLink>
+						<h:outputLink value="index.jsp"> Esci </h:outputLink>
 					</div>
 				</h:form>
 			</form>

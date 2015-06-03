@@ -78,8 +78,22 @@
 					</a>
 				</p>
 			</div>
+		
+			<div class="col-md-4">
+				<h2>Create new products</h2>
+				<p>Everything you want, you find here. Don't you know what you want?
+				With clicking on the button below, you'll know what you want and what you need.
+				Quick click !</p>
+				<p>
+					<a href="newProduct.jsp">
+						<button type="button" class="btn btn-lg btn-success">
+							View more >></button>
+					</a>
+				</p>
+			</div>
 		</div>
-	</div>
+		
+		
 
 </body>
 </html>
