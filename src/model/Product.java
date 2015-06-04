@@ -25,12 +25,12 @@ public class Product {
 	private String description; 
 	
 	@Column(nullable = true)
-	private float price;
+	private Float price;
 
 	@ManyToMany(mappedBy= "products")
 	private List<Provider> providers;
 	
-	public Product (String code, String name, String description, float price) {
+	public Product (String code, String name, String description, Float price) {
 		
 		this.code = code;
 		this.name = name;

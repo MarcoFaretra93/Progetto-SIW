@@ -21,8 +21,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
 <title>Progetto-siw</title>
+
 </head>
-<body>
+<body background="http://st.depositphotos.com/1007970/1242/i/950/depositphotos_12420922-Grand-bazaar-shops-in-Istanbul..jpg">
 
 	<nav class="navbar navbar-inverse">
 	<div class="container">
@@ -53,7 +54,7 @@
 	<div class="container theme-showcase">
 		<div class="jumbotron">
 			<div class="container">
-				<h1>Welcome to bazarOne</h1>
+				<h1 class="animated fadeInLeft delay03">Welcome to bazarOne</h1>
 				<p>A complete wonderful world where anybody can loose his mind.
 					You could find strange creature and exciting products.</p>
 				<div id="carbonads-container">
@@ -64,9 +65,8 @@
 		</div>
 </div>
 
-
-		<div class="row">
-			<div class="col-md-4">
+		<div class="row" style="color:white;">
+			<div class="col-md-4" >
 				<h2>Product Catalog</h2>
 				<p>Everything you want, you find here. Don't you know what you want?
 				With clicking on the button below, you'll know what you want and what you need.
@@ -93,7 +93,5 @@
 			</div>
 		</div>
 		
-		
-
 </body>
 </html>
