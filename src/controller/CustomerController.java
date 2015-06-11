@@ -32,6 +32,12 @@ public class CustomerController {
 	@EJB
 	private CustomerFacade customerFacade;
 	
+	
+	public String createCustomer(){
+		this.customerFacade.createCustomer(firstName, lastName, dateOfBirth, address, email, password, "customer");
+		return "customer";
+	}
+	
 	public String loginCustomer(){
 		this.customer = customerFacade.login(firstName, lastName, password);
 		if(customer==null) return "invalid";

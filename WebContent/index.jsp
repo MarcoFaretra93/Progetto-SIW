@@ -23,7 +23,8 @@
 <title>Progetto-siw</title>
 
 </head>
-<body background="http://st.depositphotos.com/1007970/1242/i/950/depositphotos_12420922-Grand-bazaar-shops-in-Istanbul..jpg">
+<body
+	background="http://st.depositphotos.com/1007970/1242/i/950/depositphotos_12420922-Grand-bazaar-shops-in-Istanbul..jpg">
 
 	<nav class="navbar navbar-inverse">
 	<div class="container">
@@ -38,7 +39,7 @@
 		<div class="navbar-collapse collapse" aria-expanded="false"
 			style="height: 1px;">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="faces/index.jsp">Home</a></li>
+				<li class="active"><a href="index.jsp">Home</a></li>
 
 			</ul>
 			<div class="navbar-right">
@@ -51,47 +52,60 @@
 	</div>
 	</nav>
 
-	<div class="container theme-showcase">
-		<div class="jumbotron">
-			<div class="container">
-				<h1 class="animated fadeInLeft delay03">Welcome to bazarOne</h1>
-				<p>A complete wonderful world where anybody can loose his mind.
-					You could find strange creature and exciting products.</p>
-				<div id="carbonads-container">
-					<div class="carbonad">
+	<f:view>
+		<div class="container theme-showcase">
+			<div class="jumbotron">
+				<div class="container">
+					<h1 class="animated fadeInLeft delay03">Welcome to bazarOne</h1>
+					<p>A complete wonderful world where anybody can loose his mind.
+						You could find strange creature and exciting products.</p>
+					<div id="carbonads-container">
+						<div class="carbonad"></div>
+
+					</div>
+				</div>
+			</div>
+
+			<div class="row" style="color: white;">
+				<div class="col-md-4">
+					<h2>Product Catalog</h2>
+					<p>Everything you want, you find here. Don't you know what you
+						want? With clicking on the button below, you'll know what you want
+						and what you need. Quick click !</p>
+					<p>
+					<h:form>
+							<h:commandButton value="View more >>"
+								action="#{productController.listProducts}" />
+					</h:form>
+					</p>
+				</div>
+
+				<div class="col-md-4">
+					<h2>Create new products</h2>
+					<p>Everything you want, you find here. Don't you know what you
+						want? With clicking on the button below, you'll know what you want
+						and what you need. Quick click !</p>
+					<p>
+						<a href="newProduct.jsp">
+							<button type="button" class="btn btn-lg btn-success">
+								View more >></button>
+						</a>
+					</p>
+				</div>
+
+				<div class="col-md-4">
+					<h2>Sign in!</h2>
+					<p>Please, register yourself for buying anything you want!</p>
+					<p>
+						<a href="newCustomer.jsp">
+							<button type="button" class="btn btn-lg btn-success">
+								View more >></button>
+						</a>
+					</p>
 				</div>
 
 			</div>
 		</div>
-</div>
-
-		<div class="row" style="color:white;">
-			<div class="col-md-4" >
-				<h2>Product Catalog</h2>
-				<p>Everything you want, you find here. Don't you know what you want?
-				With clicking on the button below, you'll know what you want and what you need.
-				Quick click !</p>
-				<p>
-					<a href="productCatalog.jsp">
-						<button type="button" class="btn btn-lg btn-success">
-							View more >></button>
-					</a>
-				</p>
-			</div>
-		
-			<div class="col-md-4">
-				<h2>Create new products</h2>
-				<p>Everything you want, you find here. Don't you know what you want?
-				With clicking on the button below, you'll know what you want and what you need.
-				Quick click !</p>
-				<p>
-					<a href="newProduct.jsp">
-						<button type="button" class="btn btn-lg btn-success">
-							View more >></button>
-					</a>
-				</p>
-			</div>
-		</div>
-		
+	</f:view>
 </body>
 </html>

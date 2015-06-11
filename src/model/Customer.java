@@ -7,6 +7,8 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
+@NamedQuery(name = "loginCustomer", query = "SELECT c FROM Customer WHERE fistname= : firstName AND lastName= : lastName")
+
 public class Customer {
 
 	@Id
@@ -23,6 +25,7 @@ public class Customer {
 	private Date dateOfBirth;
 
 	@Temporal (TemporalType.TIMESTAMP)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Date registrationDate;
 
 	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
@@ -40,15 +43,18 @@ public class Customer {
 	@Column(nullable=false)
 	private String role;
 
-	public Customer (String firstName, String lastName, Date dateOfBirth, Date registrationDate, Address address, 
-			String email, String role) {
+	public Customer(){}
+	
+	
+	public Customer (String firstName, String lastName, Date dateOfBirth, Address address, String email, String password,
+			String role) {
 
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.dateOfBirth = dateOfBirth;
-		this.registrationDate = registrationDate;
 		this.address = address;
 		this.email = email;
+		this.password=password;
 		this.orders = new ArrayList<Order>();
 		this.role = role;
 

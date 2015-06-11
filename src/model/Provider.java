@@ -26,6 +26,7 @@ public class Provider {
 	@ManyToMany
 	private List<Product> products;
 	
+	public Provider(){}
 	
 	public Provider (long id, String name, long vatEntry, Address address, float phoneNumber, String email) {
 		

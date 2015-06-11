@@ -7,12 +7,13 @@ import model.ProductFacade;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 
 @ManagedBean(name="productController")
+@SessionScoped
 public class ProductController {
 
-	@ManagedProperty(value="#{param.id}")
+
 	private Long id;
 	private String name;
 	private String code;
@@ -34,9 +35,9 @@ public class ProductController {
 		this.products = productFacade.getAllProducts();
 		return "productCatalog";
 	}
-
-	public String findProduct() {
-		this.product = productFacade.getProduct(id);
+	
+	public String findProduct(){
+		this.product = productFacade.getProduct(this.id);
 		return "product";
 	}
 	
@@ -44,6 +45,8 @@ public class ProductController {
 		this.product = productFacade.getProduct(id);
 		return "product";
 	}
+
+	
 	
 	public Long getId() {
 		return id;

@@ -8,8 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
 
 @Entity
+@NamedQuery(name = "findAllProducts", query = "SELECT p FROM Product p")
 public class Product {
 
 	@Id
@@ -29,6 +31,8 @@ public class Product {
 
 	@ManyToMany(mappedBy= "products")
 	private List<Provider> providers;
+	
+	public Product(){}
 	
 	public Product (String code, String name, String description, Float price) {
 		
@@ -88,7 +92,12 @@ public class Product {
 	public void setProviders(List<Provider> providers) {
 		this.providers = providers;
 	}
-	
+	public void setId(Long id){
+		this.id=id;
+	}
+	public Long getId(){
+		return this.id;
+	}
 }
 
 

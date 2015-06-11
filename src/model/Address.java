@@ -20,6 +20,8 @@ public class Address {
 	@Column(nullable = false)
 	private String country;
 	
+	public Address(){}
+	
 	public Address (String street, String city, String state, String zipcode, String country) {
 		
 		this.street = street;
