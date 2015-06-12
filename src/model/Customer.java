@@ -1,70 +1,98 @@
-package model;
+package it.uniroma3.model;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import javax.persistence.*;
 
 @Entity
-@NamedQuery(name = "loginCustomer", query = "SELECT c FROM Customer WHERE fistname= : firstName AND lastName= : lastName")
-
 public class Customer {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id; 
-	
-	@Column (nullable = false)
+	private long id;
+
+	@Column(nullable=false)
 	private String firstName;
+	@Column(nullable=false, unique=true)
+	private String userName;
+	@Column(nullable=false)
+	private String password;
 
-	@Column (nullable = false)
+	@Column(nullable=false)
 	private String lastName;
-
-	@Temporal (TemporalType.DATE)
+	@Column(nullable=false)
+	private String email;
+	@Column(nullable=false)
+	@Temporal(TemporalType.DATE)
 	private Date dateOfBirth;
-
-	@Temporal (TemporalType.TIMESTAMP)
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Date registrationDate;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dateOfRegistration;
+	private boolean admin;
 
 	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
 	private Address address;
 
-	@Column (nullable = false, unique = true)
-	private String email;
-
-	@Column (nullable = false)
-	private String password;
-
-	@OneToMany(mappedBy="customer", fetch = FetchType.EAGER)  
+	@OneToMany(mappedBy="customer", fetch = FetchType.EAGER)
 	private List<Order> orders;
 
-	@Column(nullable=false)
-	private String role;
-
-	public Customer(){}
-	
-	
-	public Customer (String firstName, String lastName, Date dateOfBirth, Address address, String email, String password,
-			String role) {
-
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.dateOfBirth = dateOfBirth;
-		this.address = address;
-		this.email = email;
-		this.password=password;
-		this.orders = new ArrayList<Order>();
-		this.role = role;
+	public Customer(){
 
 	}
 
-	public Long getId() {
+	public Customer(String firstName, String lastName, String userName, String password, String email, Date dateOfBirth, Date dateOfRegistration, Address address) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.userName=userName;
+		this.password=password;
+		this.email=email;
+		this.dateOfBirth=dateOfBirth;
+		this.dateOfRegistration=dateOfRegistration;
+		this.orders=new ArrayList<Order>();
+
+
+		this.address = address;
+	}
+
+
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -84,30 +112,6 @@ public class Customer {
 		this.lastName = lastName;
 	}
 
-	public Date getDateOfBirth() {
-		return dateOfBirth;
-	}
-
-	public void setDateOfBirth(Date dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
-
-	public Date getRegistrationDate() {
-		return registrationDate;
-	}
-
-	public void setRegistrationDate(Date registrationDate) {
-		this.registrationDate = registrationDate;
-	}
-
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -116,40 +120,68 @@ public class Customer {
 		this.email = email;
 	}
 
-	public String getRole() {
-		return role;
+	public Date getDateOfBirth() {
+		return dateOfBirth;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
-	}
-	
-
-	public String getPassword() {
-		return password;
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public Date getDateOfRegistration() {
+		return dateOfRegistration;
+	}
+
+	public void setDateOfRegistration(Date dateOfRegistration) {
+		this.dateOfRegistration = dateOfRegistration;
+	}
+
+
+
+
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
 	}
 
 	@Override
 	public String toString() {
-		return "Customer [id=" + id + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", dateOfBirth=" + dateOfBirth
-				+ ", registrationDate=" + registrationDate + ", address="
-				+ address + ", email=" + email + ", orders=" + orders
-				+ ", role=" + role + "]";
+		return "Customer [firstName=" + firstName + ", lastName=" + lastName
+				+ ", email=" + email + ", dateOfBirth=" + dateOfBirth
+				+ ", dateOfRegistration=" + dateOfRegistration + "]";
 	}
 
-	public boolean checkPassword(String password) {
-		if(password.equals(this.password))
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((userName == null) ? 0 : userName.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
 			return true;
-		return false;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Customer other = (Customer) obj;
+		if (userName == null) {
+			if (other.userName != null)
+				return false;
+		} else if (!userName.equals(other.userName))
+			return false;
+		return true;
 	}
-	
-	public void addOrder(Order order){
-		this.orders.add(order);
-	}
-	
+
+
+
+
+
 }

@@ -1,35 +1,50 @@
-package model;
-
-import java.util.List;
+package it.uniroma3.model;
 
 import javax.ejb.Stateless;
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaQuery;
+import java.util.List;
 
-@Stateless(name = "productFacade")
+@Stateless(name="pFacade")
 public class ProductFacade {
 
-	@PersistenceContext(unitName = "unit-progettoSiw")
-	private EntityManager em;
+    @PersistenceContext(unitName = "unit-CustomerAddress")
+    private EntityManager em;
 
-	public ProductFacade(){}
+    public Product createProduct(String name, String code, Float price, String description,int quantity) {
+        Product product = new Product(name, price, description, code, quantity);
+        em.persist(product);
+        return product;
+    }
 
-	public Product createProduct(String code, String name, String description, float price) {
-		Product product = new Product(code, name, description, price);
-		em.persist(product);
-		return product;
-	}
+    public Product getProduct(Long id) {
+        Product product = em.find(Product.class, id);
+        return product;
+    }
 
-	public Product getProduct(Long id) {
-		Product product = em.find(Product.class, id);
-		return product;
-	}
+    public List<Product> getAllProducts() {
+        CriteriaQuery<Product> cq = em.getCriteriaBuilder().createQuery(Product.class);
+        cq.select(cq.from(Product.class));
+        List<Product> products = em.createQuery(cq).getResultList();
+        return products;
+    }
 
-	public List<Product> getAllProducts() {
-		try{
-			TypedQuery<Product> q = this.em.createNamedQuery("findAllProducts", Product.class);
-			return q.getResultList();	
-		}catch(Exception e){
-			return null;
-		}
-	}
+    public void updateProduct(Product product) {
+        em.merge(product);
+    }
+
+    private void deleteProduct(Product product) {
+        em.remove(product);
+    }
+
+    public void deleteProduct(Long id) {
+        Product product = em.find(Product.class, id);
+        deleteProduct(product);
+    }
+
+    public void changeQuantity(Product product, int quantity) {
+        product.setQuantity(product.getQuantity()-quantity);
+        em.merge(product);
+    }
 }

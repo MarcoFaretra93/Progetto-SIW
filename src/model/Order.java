@@ -1,41 +1,65 @@
-package model;
+package it.uniroma3.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="orders")
+@NamedQuery(name = "findNotEvadedOrder", query = "SELECT o FROM Order o WHERE o.Evade= FALSE AND o.Complete = TRUE")
+
 public class Order {
-	
+
 	@Id
-	@GeneratedValue (strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	
-	@Temporal (TemporalType.TIMESTAMP) //restituisce sia la data che l'orario
-	private Date creationDate;
-	@Temporal (TemporalType.TIMESTAMP)	
-	private Date completionDate;
-	@Temporal (TemporalType.TIMESTAMP)
-	private Date evasionDate;
-		
-	@OneToMany(fetch = FetchType.EAGER) //EAGER: scelta da discutere
+
+	@Column(nullable=false)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dateStarting;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dateComplete;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dateEvasion;
+
+	private boolean Complete;
+	private boolean Evade;
+
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name="orders_id")
 	private List<OrderLine> orderLines;
-	
+
 	@ManyToOne
-	@JoinColumn(name="customer_id") 
+	@JoinColumn(name="customer_id")
 	private Customer customer;
-	
-	private boolean completed;
-	private boolean evaded;
-	
-	public Order(){}
-	
-	public Order (Customer customer, Date creationDate) {
-		
-		this.customer = customer;
-		this.creationDate = creationDate;
-		
+
+	public Order(){
+
+	}
+
+	public Order(Date dateStarting, Customer customer) {
+		super();
+		this.dateStarting = dateStarting;
+		this.orderLines=new ArrayList<OrderLine>();
+		this.Complete=false;
+		this.Evade=false;
+		this.customer=customer;
 	}
 
 	public Long getId() {
@@ -46,28 +70,30 @@ public class Order {
 		this.id = id;
 	}
 
-	public Date getCreationDate() {
-		return creationDate;
+
+
+	public Date getDateStarting() {
+		return dateStarting;
 	}
 
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
+	public void setDateStarting(Date dateStarting) {
+		this.dateStarting = dateStarting;
 	}
 
-	public Date getCompletionDate() {
-		return completionDate;
+	public Date getDateComplete() {
+		return dateComplete;
 	}
 
-	public void setCompletionDate(Date completionDate) {
-		this.completionDate = completionDate;
+	public void setDateComplete(Date dateComplete) {
+		this.dateComplete = dateComplete;
 	}
 
-	public Date getEvasionDate() {
-		return evasionDate;
+	public Date getDateEvasion() {
+		return dateEvasion;
 	}
 
-	public void setEvasionDate(Date evasionDate) {
-		this.evasionDate = evasionDate;
+	public void setDateEvasion(Date dateEvasion) {
+		this.dateEvasion = dateEvasion;
 	}
 
 	public List<OrderLine> getOrderLines() {
@@ -78,6 +104,9 @@ public class Order {
 		this.orderLines = orderLines;
 	}
 
+
+
+
 	public Customer getCustomer() {
 		return customer;
 	}
@@ -86,31 +115,65 @@ public class Order {
 		this.customer = customer;
 	}
 
-	public boolean isCompleted() {
-		return completed;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((dateStarting == null) ? 0 : dateStarting.hashCode());
+		return result;
 	}
 
-	public void setCompleted(boolean completed) {
-		this.completed = completed;
-	}
-
-	public boolean isEvaded() {
-		return evaded;
-	}
-
-	public void setEvaded(boolean evaded) {
-		this.evaded = evaded;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Order other = (Order) obj;
+		if (dateStarting == null) {
+			if (other.dateStarting != null)
+				return false;
+		} else if (!dateStarting.equals(other.dateStarting))
+			return false;
+		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Order [creationDate=" + creationDate + ", completionDate="
-				+ completionDate + ", evasionDate=" + evasionDate
-				+ ", completed=" + completed + ", evaded=" + evaded + "]";
+		return "Order [dateStarting=" + dateStarting + ", dateComplete="
+				+ dateComplete + ", dateEvasion=" + dateEvasion
+				+ ", orderLines=" + orderLines + "]";
 	}
 
-	
-	
-	
+	public boolean isComplete() {
+		return Complete;
+	}
+
+	public void setComplete(boolean complete) {
+		Complete = complete;
+	}
+
+	public boolean isEvade() {
+		return Evade;
+	}
+
+	public void setEvade(boolean evade) {
+		Evade = evade;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

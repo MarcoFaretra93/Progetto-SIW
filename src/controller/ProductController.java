@@ -1,53 +1,70 @@
-package controller;
+package it.uniroma3.controller;
 
 import java.util.List;
 
-import model.Product;
-import model.ProductFacade;
+import it.uniroma3.model.Product;
+import it.uniroma3.model.ProductFacade;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
+
+
+
 
 @ManagedBean(name="productController")
-@SessionScoped
 public class ProductController {
 
 
+	@ManagedProperty(value="#{param.id}")
 	private Long id;
 	private String name;
-	private String code;
 	private Float price;
 	private String description;
+	private String code;
 	private Product product;
 	private List<Product> products;
-	
-	@EJB
+	private int quantity;
+
+	@EJB(beanName="pFacade")
 	private ProductFacade productFacade;
-	
-		
-	public String createProduct(){
-		this.product = productFacade.createProduct(name, code, description, price);
+
+
+	public String createProduct() {
+		this.product = productFacade.createProduct(this.name, this.code, this.price, this.description, this.quantity);
 		return "product";
 	}
-	
-	public String listProducts(){
+
+	public String listProducts() {
 		this.products = productFacade.getAllProducts();
-		return "productCatalog";
+		return "products";
 	}
-	
-	public String findProduct(){
-		this.product = productFacade.getProduct(this.id);
-		return "product";
+
+	public String listProductsAdd(){
+		this.products = productFacade.getAllProducts();
+		return "productsList";
 	}
-	
-	public String findProduct(Long id) {
+
+	public String findProduct() {
 		this.product = productFacade.getProduct(id);
 		return "product";
 	}
 
-	
-	
+	public String findProductDetails() {
+		this.product = productFacade.getProduct(id);
+		return "productDetails";
+	}
+
+	public String findProductToInsert() {
+		this.product = productFacade.getProduct(id);
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("product", this.product);
+
+		return "productToInsert";
+	}
+
+
+
 	public Long getId() {
 		return id;
 	}
@@ -104,8 +121,25 @@ public class ProductController {
 		this.products = products;
 	}
 
-	
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public ProductFacade getProductFacade() {
+		return productFacade;
+	}
+
+	public void setProductFacade(ProductFacade productFacade) {
+		this.productFacade = productFacade;
+	}
+
+	public void changeQuantity(Product product, int quantity) {
+		this.productFacade.changeQuantity(product, quantity);
+	}
+
 }
-
-
 

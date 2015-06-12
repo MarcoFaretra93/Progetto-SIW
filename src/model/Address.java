@@ -1,36 +1,37 @@
-package model;
+package it.uniroma3.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 
 @Entity
+@NamedQuery(name = "findAllAddress", query = "SELECT a FROM Address a")
 public class Address {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
-	@Column(nullable = false)
+
+	@Column(nullable=false)
 	private String street;
-	@Column(nullable =false)
+
+	@Column(nullable=false)
 	private String city;
-	@Column(nullable = false)
-	private String state;
-	@Column(nullable = false)
-	private String zipcode;  //CAP
-	@Column(nullable = false)
-	private String country;
-	
-	public Address(){}
-	
-	public Address (String street, String city, String state, String zipcode, String country) {
-		
+
+	public Address(){
+
+	}
+
+	public Address(String street, String city) {
+		super();
 		this.street = street;
 		this.city = city;
-		this.state = state;
-		this.zipcode = zipcode;
-		this.country = country;
-		
 	}
+
+
 
 	public Long getId() {
 		return id;
@@ -56,38 +57,42 @@ public class Address {
 		this.city = city;
 	}
 
-	public String getState() {
-		return state;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((city == null) ? 0 : city.hashCode());
+		result = prime * result + ((street == null) ? 0 : street.hashCode());
+		return result;
 	}
 
-	public void setState(String state) {
-		this.state = state;
-	}
-
-	public String getZipcode() {
-		return zipcode;
-	}
-
-	public void setZipcode(String zipcode) {
-		this.zipcode = zipcode;
-	}
-
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Address other = (Address) obj;
+		if (city == null) {
+			if (other.city != null)
+				return false;
+		} else if (!city.equals(other.city))
+			return false;
+		if (street == null) {
+			if (other.street != null)
+				return false;
+		} else if (!street.equals(other.street))
+			return false;
+		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Address [id=" + id + ", street=" + street + ", city=" + city
-				+ ", state=" + state + ", zipcode=" + zipcode + ", country="
-				+ country + "]";
+		return "Address [street=" + street + ", city=" + city + "]";
 	}
 
-	
-	
+
 
 }
