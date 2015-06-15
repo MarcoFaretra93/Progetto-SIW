@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="PostgreSQL - bazarone@localhost" uuid="79a65374-5456-4839-93b6-a80a71f827d2">
+      <secret-storage>master_key</secret-storage>
+      <user-name>postgres</user-name>
+      <schema-pattern>bazarone.pg_catalog bazarone.public</schema-pattern>
+      <default-schemas>bazarone.pg_catalog bazarone.public</default-schemas>
+    </data-source>
+  </component>
+</project>

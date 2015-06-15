@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="Progetto_siw:war exploded">
+    <output-path>$PROJECT_DIR$/classes/artifacts/Progetto_siw_war_exploded</output-path>
+    <root id="root">
+      <element id="module-output" name="Progetto-SIW" />
+    </root>
+  </artifact>
+</component>
